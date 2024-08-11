@@ -9,7 +9,7 @@ export default function SignIn() {
 
   useEffect(() => {
     if (currentUser) navigate('/');
-  })
+  }, [currentUser])
 
   return (
     <div>

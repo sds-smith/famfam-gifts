@@ -9,7 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!currentUser) navigate('/');
-  })
+  }, [currentUser])
 
   return (
     <div>
