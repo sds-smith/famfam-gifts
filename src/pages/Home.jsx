@@ -11,8 +11,6 @@ export default function Home() {
   const { currentUser } = useAuthContext();
   const { familyMembers } = useFamilyMembersContext();
 
-  useEffect(() => console.log('[Home]',{familyMembers}))
-
   useEffect(() => {
     if (!currentUser) navigate('/');
   }, [currentUser])

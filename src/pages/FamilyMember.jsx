@@ -1,13 +1,10 @@
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Heading } from '@chakra-ui/react';
 import Items from '../components/Items';
-import { useFamilyMembersContext } from '../context/FamilyMembersContext';
+import { useFamilyMemberParam } from '../hooks/useFamilyMemberParam';
 
 export default function FamilyMember() {
-    const { familyMembers } = useFamilyMembersContext();
-    const { memberParam } = useParams();
-
-    const { displayName, items } = familyMembers?.find(member => member?.displayName === memberParam.replace('_', ' ')) || {}; 
+    const { displayName, items } = useFamilyMemberParam();
 
     return (
       <>

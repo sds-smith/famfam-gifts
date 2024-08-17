@@ -1,10 +1,11 @@
-import { useState, useContext, createContext } from "react";
+import { useContext, createContext } from "react";
 import { googleSignIn, signOutUser } from "../utils/firebase.utils";
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({children}) => {
-    const [ currentUser, setCurrentUser ] = useState(null);
+    const [ currentUser, setCurrentUser ] = useLocalStorage('currentUser');
     const signIn = () => googleSignIn().then(setCurrentUser);
     const signOut = () => signOutUser().then(() => setCurrentUser(null));
     const signInOut = () => Boolean(currentUser) ? signOut() : signIn();

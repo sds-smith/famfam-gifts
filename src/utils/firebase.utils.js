@@ -76,7 +76,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
         } catch (error) {
             console.log('error creating the user', error)
         }
-    }
+    } 
     const userData = userSnapshot.data()
     return {...userData, photoURL}
 }

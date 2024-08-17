@@ -26,26 +26,11 @@ export default function TopNav() {
               <Box>FamFam Gift Reg</Box>
             </HStack>
             <Flex alignItems={'center'}>
-                <SignInOutButton />
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={'full'}
-                  variant={'link'}
-                  cursor={'pointer'}
-                  minW={0}>
-                  <Avatar
-                    size={'sm'}
-                    src={ currentUser?.photoURL }
-                  />
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>Link 1</MenuItem>
-                  <MenuItem>Link 2</MenuItem>
-                  <MenuDivider />
-                  <MenuItem>Link 3</MenuItem>
-                </MenuList>
-              </Menu>
+              <SignInOutButton /> 
+              <Avatar
+                size={'sm'}
+                src={ currentUser?.photoURL }
+              />
             </Flex>
           </Flex>
         </Box>
