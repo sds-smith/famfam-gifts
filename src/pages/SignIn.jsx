@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import SignInOutButton from '../components/SignInOutButton';
 import { useAuthContext } from '../context/AuthContext';
 
 export default function SignIn() {
@@ -12,9 +11,8 @@ export default function SignIn() {
   }, [currentUser])
 
   return (
-    <div>
-        SignIn
-        <SignInOutButton />
+    <div style={{marginTop: '30px', fontSize: '30px'}}>
+      Please Sign In to Access Application
     </div>
   )
 }

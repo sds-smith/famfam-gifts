@@ -1,11 +1,12 @@
 
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
+import TopNav from '../components/TopNav';
 
 export default function Navigation() {
   return (
-    <div>
-        Navigation
-        <Outlet />
+    <div style={{minHeight: '100vh', position: 'relative'}}>
+      <TopNav />
+      <Outlet />
     </div>
   )
 }

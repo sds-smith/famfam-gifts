@@ -1,4 +1,5 @@
 
+import { Button } from '@chakra-ui/react';
 import { useAuthContext } from '../context/AuthContext';
 
 export default function SignInOutButton() {
@@ -6,6 +7,6 @@ export default function SignInOutButton() {
     const btnText = currentUser ? 'Sign Out' : 'Sign In';
 
     return (
-      <button onClick={signInOut}>{btnText}</button>
+      <Button variant='ghost' onClick={signInOut}>{btnText}</Button>
     )
 }
