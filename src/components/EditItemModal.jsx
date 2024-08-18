@@ -14,10 +14,10 @@ import {
     Textarea,
     Stack
   } from '@chakra-ui/react';
-  import { useMarkPurchased } from '../hooks/useMarkPurchased';
+  import { useEditList } from '../hooks/useEditList';
 
   export default function EditItemModal({action, item, isOpen, onClose}) {
-    const { submitEdit, addItem } = useMarkPurchased();
+    const { submitEdit, addItem } = useEditList();
 
     const [ name, setName ] = useState(item.name || '');
     const [ url, setUrl ] = useState(item.url || '');

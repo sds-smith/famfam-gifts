@@ -1,10 +1,10 @@
 
 import { Button, Tag, useColorModeValue } from '@chakra-ui/react';
-import { useMarkPurchased } from '../hooks/useMarkPurchased';
+import { useEditList } from '../hooks/useEditList';
 
 export default function PurchaseWidget({ item }) {
     const { purchased, purchasedBy } = item;
-    const { markItemPurchased } = useMarkPurchased();
+    const { markItemPurchased } = useEditList();
 
   return (
     <>

@@ -17,7 +17,6 @@ function App() {
           <Route index element={<Landing />} />
           <Route path={'home/*'} element={<FamilyMembersProvider><Home /></FamilyMembersProvider>} />
           <Route path={'sign-in'} element={<SignIn />} />          
-          <Route path={`home/list`} element={<FamilyMember />} />
         </Route>
       </Routes>
     </BrowserRouter>

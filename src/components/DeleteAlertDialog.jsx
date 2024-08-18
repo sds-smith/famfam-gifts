@@ -8,11 +8,11 @@ import {
     AlertDialogOverlay,
     Button,
   } from '@chakra-ui/react';
-  import { useMarkPurchased } from '../hooks/useMarkPurchased';
+  import { useEditList } from '../hooks/useEditList';
 
   export default function DeleteAlertDialog({item, isOpen, onClose}) {
     const cancelRef = useRef();
-    const { deleteItem } = useMarkPurchased();
+    const { deleteItem } = useEditList();
 
     const handleDelete = () => {
         deleteItem(item);

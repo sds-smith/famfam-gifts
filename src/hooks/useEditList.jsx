@@ -4,7 +4,7 @@ import { useFamilyMembersContext } from "../context/FamilyMembersContext";
 import { useFamilyMemberParam } from "./useFamilyMemberParam";
 import { updateUser } from "../utils/firebase.utils";
 
-export function useMarkPurchased() {
+export function useEditList() {
     const { currentUser } = useAuthContext();
     const { updateFamilyMembers } = useFamilyMembersContext();
     const { uid: memberId, items } = useFamilyMemberParam();
