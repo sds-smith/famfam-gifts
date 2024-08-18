@@ -42,7 +42,7 @@ export default function ItemCardBase({item}) {
           <Box>
             <Text>{`${item?.comment}`}</Text>
             { isParent && !userSelectedSelf && <PurchaseWidget item={item} /> }
-            { userSelectedSelf && <MyItemControls />}
+            { userSelectedSelf && <MyItemControls item={item} />}
           </Box>
         </CardBody>
       </Card>

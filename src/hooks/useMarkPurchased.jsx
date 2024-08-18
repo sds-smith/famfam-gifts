@@ -27,7 +27,23 @@ export function useMarkPurchased() {
         updateFamilyMembers(updatedUsersArray);
     }
 
+    const submitEdit = async (newItem) => {
+        const updatedItems = items.filter(itemToKeep => itemToKeep.id !== newItem.id)
+        updatedItems.push(newItem)
+        updatedItems.sort((a,b) => a.id - b.id)
+        const updatedUsersArray = await updateUser(uid, updatedItems)
+        updateFamilyMembers(updatedUsersArray);
+    }
+
+    const deleteItem = async (item) => {
+        const updatedItems = items.filter(itemToMatch => itemToMatch.id !== item.id)
+        const updatedUsersArray = await updateUser(uid, updatedItems)
+        updateFamilyMembers(updatedUsersArray);
+    }
+
     return {
-        markItemPurchased
+        markItemPurchased,
+        submitEdit,
+        deleteItem
     }
 }
