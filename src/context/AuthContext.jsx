@@ -7,7 +7,7 @@ export const AuthContext = createContext(null);
 export const AuthProvider = ({children}) => {
     const [ currentUser, setCurrentUser ] = useLocalStorage('currentUser');
     const signIn = () => googleSignIn().then(setCurrentUser);
-    const signOut = () => signOutUser().then(() => setCurrentUser(null));
+    const signOut = () => signOutUser().then(() => setCurrentUser(''));
     const signInOut = () => Boolean(currentUser) ? signOut() : signIn();
 
     const value = {
