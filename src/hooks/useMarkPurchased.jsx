@@ -35,6 +35,13 @@ export function useMarkPurchased() {
         updateFamilyMembers(updatedUsersArray);
     }
 
+    const addItem = async (newItem) => {
+        const updatedItems = [...items, {...newItem, id: items.length}]
+        updatedItems.sort((a,b) => a.id - b.id)
+        const updatedUsersArray = await updateUser(uid, updatedItems)
+        updateFamilyMembers(updatedUsersArray);
+    }
+
     const deleteItem = async (item) => {
         const updatedItems = items.filter(itemToMatch => itemToMatch.id !== item.id)
         const updatedUsersArray = await updateUser(uid, updatedItems)
@@ -44,6 +51,7 @@ export function useMarkPurchased() {
     return {
         markItemPurchased,
         submitEdit,
+        addItem,
         deleteItem
     }
 }

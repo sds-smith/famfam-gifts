@@ -13,7 +13,7 @@ export default function MyItemControls({ item }) {
         <Button colorScheme='blue' onClick={onOpenEdit} id='editButton'>Edit</Button>
         <Button colorScheme='red' onClick={onOpenDelete} id='deleteButton'>Delete</Button>
       </ButtonGroup>
-      <EditItemModal item={item} isOpen={isOpenEdit} onClose={onCloseEdit}/>
+      <EditItemModal action='Edit' item={item} isOpen={isOpenEdit} onClose={onCloseEdit}/>
       <DeleteAlertDialog item={item} isOpen={isOpenDelete} onClose={onCloseDelete} />
     </>
   )

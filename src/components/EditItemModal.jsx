@@ -16,20 +16,25 @@ import {
   } from '@chakra-ui/react';
   import { useMarkPurchased } from '../hooks/useMarkPurchased';
 
-  export default function EditItemModal({item, isOpen, onClose}) {
-    const { submitEdit } = useMarkPurchased();
+  export default function EditItemModal({action, item, isOpen, onClose}) {
+    const { submitEdit, addItem } = useMarkPurchased();
 
-    const [ name, setName ] = useState(item.name);
-    const [ url, setUrl ] = useState(item.url);
-    const [ comment, setComment ] = useState(item.comment);
+    const [ name, setName ] = useState(item.name || '');
+    const [ url, setUrl ] = useState(item.url || '');
+    const [ comment, setComment ] = useState(item.comment || '');
 
     const handleChangeName = (e) => setName(e.target.value);
     const handleChangeUrl = (e) => setUrl(e.target.value);
     const handleChangeComment = (e) => setComment(e.target.value);
 
-    function submit(e) {
+    const submit = {
+        Edit: submitEdit,
+        Add: addItem
+    }
+
+    function handleSubmit(e) {
         e.preventDefault();
-        submitEdit({
+        submit[action]({
             id: item.id,
             name,
             url,
@@ -42,7 +47,7 @@ import {
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>{`Edit ${item.name}`}</ModalHeader>
+            <ModalHeader>{`${action} ${item.name || 'Item'}`}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
                 <Stack spacing={3}>
@@ -73,7 +78,7 @@ import {
                 </Stack>
             </ModalBody>
             <ModalFooter>
-              <Button colorScheme='blue' mr={3} onClick={submit}>
+              <Button colorScheme='blue' mr={3} onClick={handleSubmit}>
                 Submit
               </Button>
               <Button variant='ghost' onClick={onClose}>Cancel</Button>
