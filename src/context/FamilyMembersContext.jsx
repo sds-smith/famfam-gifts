@@ -18,12 +18,15 @@ export const FamilyMembersProvider = ({children}) => {
             .finally(() => setLoading(false))
     }
 
+    const updateFamilyMembers = (newFamilyMembersArray) => setFamilyMembers(newFamilyMembersArray);
+
     useEffect(() => {
         if (currentUser && !familyMembers && !loading && !error) getFamilyMembers();
     }, [currentUser, familyMembers, loading, error]);
 
     const value = {
-        familyMembers
+        familyMembers,
+        updateFamilyMembers
     }
 
     return <FamilyMembersContext.Provider value={value} >{children}</FamilyMembersContext.Provider>
