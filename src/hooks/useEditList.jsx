@@ -2,11 +2,11 @@
 import { useAuthContext } from "../context/AuthContext";
 import { useFamilyMembersContext } from "../context/FamilyMembersContext";
 import { useFamilyMemberParam } from "./useFamilyMemberParam";
-import { updateUser } from "../utils/firebase.utils";
+import { updateUser, updateCombinedUser } from "../utils/firebase.utils";
 
 export function useEditList() {
     const { currentUser } = useAuthContext();
-    const { updateFamilyMembers } = useFamilyMembersContext();
+    const { familyMembers, updateFamilyMembers } = useFamilyMembersContext();
     const { uid: memberId, items } = useFamilyMemberParam();
 
     const { displayName, uid } = currentUser;
@@ -48,10 +48,22 @@ export function useEditList() {
         updateFamilyMembers(updatedUsersArray);
     }
 
+    const combineUsers = async (firstUser, secondUser) => {
+        const first = familyMembers.find(fm => fm.uid === firstUser)
+        const second = familyMembers.find(fm => fm.uid === secondUser)
+        const { displayName, email, uid } = first;
+        const { createdAt, items, role } = second;
+        const userToUpdate = { displayName, email, uid, createdAt, items, role }
+        console.log({userToUpdate})
+        const updatedUsersArray = await updateCombinedUser(uid, userToUpdate)
+        updateFamilyMembers(updatedUsersArray)
+    }
+
     return {
         markItemPurchased,
         submitEdit,
         addItem,
-        deleteItem
+        deleteItem,
+        combineUsers
     }
 }

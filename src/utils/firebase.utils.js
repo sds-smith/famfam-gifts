@@ -95,3 +95,10 @@ export const updateUser = async (userId, updatedItems) => {
   })
   return await getUsers()
 }
+
+
+export const updateCombinedUser = async (userId, userToUpdate) => {
+  const userDocRef = doc(db, "users", userId);
+  await updateDoc(userDocRef, userToUpdate)
+  return await getUsers()
+}

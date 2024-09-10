@@ -12,12 +12,13 @@ import {
   MenuDivider,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { Link } from 'react-router-dom';
 import SignInOutButton from './SignInOutButton';
 import { useAuthContext } from '../context/AuthContext';
 
 export default function TopNav() {
     const { currentUser } = useAuthContext();
-
+console.log({currentUser})
     return (
       <>
         <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -26,6 +27,7 @@ export default function TopNav() {
               <Box>FamFam Gift Reg</Box>
             </HStack>
             <Flex alignItems={'center'}>
+              {currentUser.uid === 'lT2RK45Bb8WSmOKL78MLhBX7u6H3' && <Link to='/admin' >Admin</Link>}
               <SignInOutButton /> 
               <Avatar
                 size={'sm'}
