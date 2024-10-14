@@ -27,7 +27,7 @@ console.log({currentUser})
               <Box>FamFam Gift Reg</Box>
             </HStack>
             <Flex alignItems={'center'}>
-              {currentUser.uid === 'lT2RK45Bb8WSmOKL78MLhBX7u6H3' && <Link to='/admin' >Admin</Link>}
+              {/* {currentUser.uid === 'lT2RK45Bb8WSmOKL78MLhBX7u6H3' && <Link to='/admin' >Admin</Link>} */}
               <SignInOutButton /> 
               <Avatar
                 size={'sm'}
