@@ -27,6 +27,12 @@ import {
     const handleChangeUrl = (e) => setUrl(e.target.value);
     const handleChangeComment = (e) => setComment(e.target.value);
 
+    const resetModalState = () => {
+        setName("");
+        setUrl("");
+        setComment("");
+    }
+
     const submit = {
         Edit: submitEdit,
         Add: addItem
@@ -40,6 +46,7 @@ import {
             url,
             comment
         });
+        resetModalState();
         onClose();
     }
 
