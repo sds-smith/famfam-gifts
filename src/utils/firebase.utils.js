@@ -35,7 +35,12 @@ const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 
 export const googleSignIn = async () => {
   const { user } = await signInWithGooglePopup();
-  return await createUserDocumentFromAuth(user, {items: []});
+  const users = await getUsers();
+  console.log('[firebase.utils] googleSignIn', {users})
+  if (users.find(foundUser => foundUser.email === user.email)) {
+    return await createUserDocumentFromAuth(user, {items: []});
+  }
+  return null;
 }
 
 export const signOutUser = async () => await signOut(auth)
