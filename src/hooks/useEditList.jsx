@@ -27,6 +27,19 @@ export function useEditList() {
         updateFamilyMembers(updatedUsersArray);
     }
 
+    const undoPurchase = async (item) => { 
+        const updatedItem = Object.assign(item, {
+            purchased: false,
+            purchasedBy: null
+        })
+        const updatedItems = items.filter(itemToKeep => itemToKeep.id !== item.id)
+        updatedItems.push(updatedItem)
+        updatedItems.sort((a,b) => a.id - b.id)
+
+        const updatedUsersArray = await updateUser(memberId, updatedItems)
+        updateFamilyMembers(updatedUsersArray);
+    }
+
     const submitEdit = async (newItem) => {
         const updatedItems = items.filter(itemToKeep => itemToKeep.id !== newItem.id)
         updatedItems.push(newItem)
@@ -61,6 +74,7 @@ export function useEditList() {
 
     return {
         markItemPurchased,
+        undoPurchase,
         submitEdit,
         addItem,
         deleteItem,
