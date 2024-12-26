@@ -18,7 +18,7 @@ import { useAuthContext } from '../context/AuthContext';
 
 export default function TopNav() {
     const { currentUser } = useAuthContext();
-console.log({currentUser})
+
     return (
       <>
         <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
