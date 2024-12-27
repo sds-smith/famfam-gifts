@@ -28,16 +28,18 @@ export function useEditList() {
     }
 
     const undoPurchase = async (item) => { 
-        const updatedItem = Object.assign(item, {
-            purchased: false,
-            purchasedBy: null
-        })
-        const updatedItems = items.filter(itemToKeep => itemToKeep.id !== item.id)
-        updatedItems.push(updatedItem)
-        updatedItems.sort((a,b) => a.id - b.id)
-
-        const updatedUsersArray = await updateUser(memberId, updatedItems)
-        updateFamilyMembers(updatedUsersArray);
+        if ( uid === item.purchasedBy.uid ) {
+            const updatedItem = Object.assign(item, {
+                purchased: false,
+                purchasedBy: null
+            })
+            const updatedItems = items.filter(itemToKeep => itemToKeep.id !== item.id)
+            updatedItems.push(updatedItem)
+            updatedItems.sort((a,b) => a.id - b.id)
+    
+            const updatedUsersArray = await updateUser(memberId, updatedItems)
+            updateFamilyMembers(updatedUsersArray);
+        }
     }
 
     const submitEdit = async (newItem) => {
