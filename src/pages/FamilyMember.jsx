@@ -6,6 +6,8 @@ import { useFamilyMemberParam } from '../hooks/useFamilyMemberParam';
 export default function FamilyMember() {
     const { displayName, items } = useFamilyMemberParam();
 
+    const prioritizedItems = items?.sort ((a, b) => a.priority - b.priority)
+
     return (
       <>
         <Link to='/home'>{'< Home'}</Link>

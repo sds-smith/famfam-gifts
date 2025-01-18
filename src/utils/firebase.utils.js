@@ -90,7 +90,14 @@ export const getUsers = async () => {
   const collectionRef = collection(db, 'users')
   const q = query(collectionRef)
   const querySnapshot = await getDocs(q)
-  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data())
+  return querySnapshot.docs.map((docSnapshot) => {
+    const user = docSnapshot.data();
+    user.items = user.items.map(item => ({
+      ...item,
+      priority: item.priority || 10
+    }))
+    return user;
+  })
 }
 
 export const updateUser = async (userId, updatedItems) => {

@@ -22,10 +22,12 @@ import {
     const [ name, setName ] = useState(item.name || '');
     const [ url, setUrl ] = useState(item.url || '');
     const [ comment, setComment ] = useState(item.comment || '');
+    const [ priority, setPriority ] = useState(item.priority || 10);
 
     const handleChangeName = (e) => setName(e.target.value);
     const handleChangeUrl = (e) => setUrl(e.target.value);
     const handleChangeComment = (e) => setComment(e.target.value);
+    const handleChangePriority = (e) => setPriority(e.target.value);
 
     const resetModalState = () => {
         setName("");
@@ -44,7 +46,8 @@ import {
             id: item.id,
             name,
             url,
-            comment
+            comment,
+            priority
         });
         resetModalState();
         onClose();
@@ -81,6 +84,19 @@ import {
                             value={comment}
                             onChange={handleChangeComment}
                         />
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel>Set Priority</FormLabel>
+                        <select 
+                            style={{width: '100%'}}
+                            name="priority" 
+                            id="priority-select"
+                            value={priority}
+                            onChange={handleChangePriority}
+                        >
+                          <option ></option>
+                          {[1,2,3,4,5,].map(option => <option key={option} value={option}>{option}</option>)}
+                        </select>
                     </FormControl>
                 </Stack>
             </ModalBody>

@@ -28,7 +28,10 @@ export default function ItemCardBase({item}) {
           <Flex spacing='4'>
             <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
               <Box>
-                <Heading size='sm'>{item?.name}</Heading>
+                <Heading size='md' >{item?.name}</Heading>
+                { item?.priority <= 5 &&
+                  <Heading size='sm' fontWeight='semibold'>{`Priority Level: ${item?.priority}`}</Heading> 
+                }
                 { Boolean(item.url) && (
                   <Text>
                     <LinkOverlay href={item.url} target='_blank' rel='no-referrer'>{item.url.split('/')[2]}</LinkOverlay>
