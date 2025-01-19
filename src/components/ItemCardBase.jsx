@@ -22,7 +22,8 @@ const borderColor = {
     3:  'green.200',
     4:  'yellow.200',
     5:  'orange.200',
-    10: 'blackAlpha.50'
+    // 10: 'blackAlpha.50'
+    10: 'rgba(0, 0, 0, 0.1)'
   },
   darkModeValue: {
     1:  'cyan.700',
@@ -30,7 +31,8 @@ const borderColor = {
     3:  'green.700',
     4:  'yellow.700',
     5:  'orange.700',
-    10: 'whiteAlpha.200'
+    // 10: 'whiteAlpha.200'
+    10: 'rgba(0, 0, 0, 0.1)'
   }
 }
 
@@ -45,7 +47,7 @@ export default function ItemCardBase({item}) {
     <Card 
       w='xs' 
       bg={useColorModeValue('blackAlpha.50', 'whiteAlpha.200')} 
-      borderWidth={'2px'}
+      borderWidth={item.priority !== 10 && '0px 1px 4px 0px'}
       borderColor={useColorModeValue(borderColor.lightModeValue[item.priority], borderColor.darkModeValue[item.priority])}
     >
       <CardHeader>
