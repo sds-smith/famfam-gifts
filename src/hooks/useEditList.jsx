@@ -51,7 +51,8 @@ export function useEditList() {
     }
 
     const addItem = async (newItem) => {
-        const updatedItems = [...items, {...newItem, id: items.length}]
+        const id = items.reduce((acc, curr) => Math.max(acc, curr.id), 0) + 1;
+        const updatedItems = [...items, {...newItem, id}]
         updatedItems.sort((a,b) => a.id - b.id)
         const updatedUsersArray = await updateUser(uid, updatedItems)
         updateFamilyMembers(updatedUsersArray);
