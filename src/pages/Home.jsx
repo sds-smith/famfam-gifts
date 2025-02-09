@@ -5,7 +5,6 @@ import { useFamilyMembersContext } from '../context/FamilyMembersContext';
 import { VStack } from '@chakra-ui/react';
 import FamilyMemberCard from '../components/FamilyMemberCard';
 import FamilyMember from './FamilyMember';
-import { updateUser } from '../utils/firebase.utils';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -16,21 +15,8 @@ export default function Home() {
     if (!currentUser) navigate('/');
   }, [currentUser])
 
-  const button = () => {
-    console.log({familyMembers})
-    familyMembers.forEach(async fm => {
-      const items = fm.items.map((item, idx) => ({
-        ...item,
-        id: idx + 1
-      }))
-      await updateUser(fm.id, items)
-    })
-    console.log({familyMembers})
-  }
-
   return (
     <div style={{paddingTop: '30px'}}>
-      <button onClick={button}>button</button>
       <Routes>
         <Route path='/' element={          
           <VStack
@@ -46,7 +32,6 @@ export default function Home() {
         />
         <Route path=':memberParam' element={<FamilyMember/>}/>
       </Routes>
-
     </div>
   )
 }
