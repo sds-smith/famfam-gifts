@@ -14,14 +14,14 @@ import {
 
 export default function FamilyMemberCard({member}) {
   const memberParam = member?.displayName.replace(' ', '_');
-
+console.log({member})
   return (
     <Link to={`/home/${memberParam}`}>
       <Card w='xs' bg={useColorModeValue('blackAlpha.50', 'whiteAlpha.200')} >
         <CardHeader>
           <Flex spacing='4'>
             <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-              <Avatar name={member.displayName} src={member.photoUrl}/>
+              <Avatar name={member.displayName} src={member.photoURL}/>
               <Box>
                 <Heading size='sm'>{member?.displayName}</Heading>
                 <Text>{`Items: ${member?.items.length}`}</Text>

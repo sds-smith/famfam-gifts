@@ -81,9 +81,16 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
         } catch (error) {
             console.log('error creating the user', error)
         }
-    } 
-    const userData = userSnapshot.data()
-    return {...userData, photoURL}
+    } else {
+        try {
+            await setDoc(userDocRef, {
+                photoURL
+            }, { merge: true })
+        } catch (error) {
+            console.log('error creating the user', error)
+        }
+    }
+    return userSnapshot.data()
 }
 
 export const getUsers = async () => {
