@@ -1,12 +1,19 @@
-import { useEffect } from 'react';
-import { Button, ButtonGroup, useDisclosure } from '@chakra-ui/react'
+import { useState } from 'react';
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 import EditItemModal from './EditItemModal';
 import DeleteAlertDialog from './DeleteAlertDialog';
 import { useEditList } from '../hooks/useEditList';
 
 export default function MyItemControls({ item }) {
-  const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure('editButton');
-  const { isOpen: isOpenDelete, onOpen: onOpenDelete, onClose: onCloseDelete } = useDisclosure('deleteButton');
+
+  const [ isOpenEdit, setIsOpenEdit ] = useState(false);
+  const [ isOpenDelete, setIsOpenDelete ] = useState(false);
+
+  const onOpenEdit = () => setIsOpenEdit(true)
+  const onOpenDelete = () => setIsOpenDelete(true)
+  const onCloseEdit = () => setIsOpenEdit(false)
+  const onCloseDelete = () => setIsOpenDelete(false)
 
   const { undoPurchase } = useEditList();
   const receive = () => {

@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate, Routes, Route } from 'react-router-dom';
+import Stack from "@mui/material/Stack";
 import { useAuthContext } from '../context/AuthContext';
 import { useFamilyMembersContext } from '../context/FamilyMembersContext';
-import { VStack } from '@chakra-ui/react';
 import FamilyMemberCard from '../components/FamilyMemberCard';
 import FamilyMember from './FamilyMember';
 
@@ -19,7 +19,7 @@ export default function Home() {
     <div style={{paddingTop: '30px'}}>
       <Routes>
         <Route path='/' element={          
-          <VStack
+          <Stack
             spacing={4}
           >
             { familyMembers?.map(member => (
@@ -28,7 +28,7 @@ export default function Home() {
                 member={member} 
               />
             ))}
-          </VStack>} 
+          </Stack>} 
         />
         <Route path=':memberParam' element={<FamilyMember/>}/>
       </Routes>

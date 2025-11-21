@@ -1,17 +1,12 @@
-import { useRef } from 'react';
-import {
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogContent,
-    AlertDialogOverlay,
-    Button,
-  } from '@chakra-ui/react';
-  import { useEditList } from '../hooks/useEditList';
+
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+import { useEditList } from '../hooks/useEditList';
 
   export default function DeleteAlertDialog({item, isOpen, onClose}) {
-    const cancelRef = useRef();
     const { deleteItem } = useEditList();
 
     const handleDelete = () => {
@@ -21,32 +16,27 @@ import {
   
     return (
       <>
-        <AlertDialog
-          isOpen={isOpen}
-          leastDestructiveRef={cancelRef}
+        <Dialog
+          open={isOpen}
           onClose={onClose}
         >
-          <AlertDialogOverlay>
-            <AlertDialogContent>
-              <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              <DialogTitle fontSize='lg' fontWeight='bold'>
                 {`Delete ${item.name}`}
-              </AlertDialogHeader>
+              </DialogTitle>
   
-              <AlertDialogBody>
+              <DialogContent>
                 Are you sure? You can't undo this action afterwards.
-              </AlertDialogBody>
+              </DialogContent>
   
-              <AlertDialogFooter>
-                <Button ref={cancelRef} onClick={onClose}>
+              <DialogActions>
+                <Button onClick={onClose}>
                   Cancel
                 </Button>
                 <Button colorScheme='red' onClick={handleDelete} ml={3}>
                   Delete
                 </Button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialogOverlay>
-        </AlertDialog>
+              </DialogActions>
+        </Dialog>
       </>
     )
   }

@@ -1,20 +1,15 @@
 import { useState } from 'react';
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Button,
-    FormControl,
-    FormLabel,
-    Input,
-    Textarea,
-    Stack
-  } from '@chakra-ui/react';
-  import { useEditList } from '../hooks/useEditList';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+import { useEditList } from '../hooks/useEditList';
 
   export default function EditItemModal({action, item, isOpen, onClose}) {
     const { submitEdit, addItem } = useEditList();
@@ -54,16 +49,13 @@ import {
     }
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>{`${action} ${item.name || 'Item'}`}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
+        <Dialog open={isOpen} onClose={onClose}>
+            <DialogTitle>{`${action} ${item.name || 'Item'}`}</DialogTitle>
+            <DialogContent>
                 <Stack spacing={3}>
                     <FormControl>
                         <FormLabel>Item Name</FormLabel>
-                        <Input 
+                        <TextField 
                             size='md'
                             value={name}
                             onChange={handleChangeName}
@@ -71,7 +63,7 @@ import {
                     </FormControl>
                     <FormControl>
                         <FormLabel>Item URL</FormLabel>
-                        <Input 
+                        <TextField 
                             size='md'
                             value={url}
                             onChange={handleChangeUrl}
@@ -79,7 +71,8 @@ import {
                     </FormControl>
                     <FormControl>
                         <FormLabel>Comments</FormLabel>
-                        <Textarea 
+                        <TextField
+                            lines="4" 
                             size='md'
                             value={comment}
                             onChange={handleChangeComment}
@@ -87,26 +80,26 @@ import {
                     </FormControl>
                     <FormControl>
                         <FormLabel>Set Priority</FormLabel>
-                        <select 
+                        <TextField
+                            select 
                             style={{width: '100%'}}
                             name="priority" 
                             id="priority-select"
                             value={priority}
                             onChange={handleChangePriority}
                         >
-                          <option ></option>
-                          {[1,2,3,4,5,].map(option => <option key={option} value={option}>{option}</option>)}
-                        </select>
+                          <MenuItem ></MenuItem>
+                          {[1,2,3,4,5,].map(option => <MenuItem key={option} value={option}>{option}</MenuItem>)}
+                        </TextField>
                     </FormControl>
                 </Stack>
-            </ModalBody>
-            <ModalFooter>
+            </DialogContent>
+            <DialogActions>
               <Button colorScheme='blue' mr={3} onClick={handleSubmit}>
                 Submit
               </Button>
               <Button variant='ghost' onClick={onClose}>Cancel</Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+            </DialogActions>
+        </Dialog>
     )
   }

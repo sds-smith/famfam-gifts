@@ -1,28 +1,34 @@
+import { useState } from 'react';
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
-import { Button, VStack, useDisclosure } from '@chakra-ui/react'
 import ItemCard from './ItemCard';
 import EditItemModal from './EditItemModal';
 import { useAuthContext } from '../context/AuthContext';
 import { useFamilyMemberParam } from '../hooks/useFamilyMemberParam';
 
 export default function Items({ items }) {
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const { currentUser } = useAuthContext();
     const selectedFamilyMember = useFamilyMemberParam();
+
+  const [ isOpenEdit, setIsOpenEdit ] = useState(false);
+
+  const onOpenEdit = () => setIsOpenEdit(true)
+  const onCloseEdit = () => setIsOpenEdit(false)
 
     const userSelectedSelf = currentUser?.uid === selectedFamilyMember?.uid;
 
     return (
         <>
-            <VStack spacing={4} align='start'>
-                { userSelectedSelf && <Button colorScheme='blue' onClick={onOpen}>Add Item</Button> }
-                <VStack spacing={4}>
+            <Stack spacing={4} align='start'>
+                { userSelectedSelf && <Button colorScheme='blue' onClick={onOpenEdit}>Add Item</Button> }
+                <Stack spacing={4}>
                     { items?.map(item => (
                         <ItemCard key={item.name} item={item} />
                     ))}
-                </VStack>
-            </VStack>
-            <EditItemModal action='Add' item={{}} isOpen={isOpen} onClose={onClose} />
+                </Stack>
+            </Stack>
+            <EditItemModal action='Add' item={{}} isOpen={isOpenEdit} onClose={onCloseEdit} />
         </>
       )
 }

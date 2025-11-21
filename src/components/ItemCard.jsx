@@ -1,5 +1,4 @@
 
-import { LinkBox } from '@chakra-ui/react';
 import ItemCardBase from './ItemCardBase';
 
 export default function ItemCard({item}) {
@@ -8,11 +7,9 @@ export default function ItemCard({item}) {
     <>
       { item.url 
         ? (
-          <LinkBox>
             <ItemCardBase
               item={item}
             />
-          </LinkBox>
         ) : (
           <ItemCardBase
             item={item}

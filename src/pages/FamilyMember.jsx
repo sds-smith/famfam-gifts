@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Heading } from '@chakra-ui/react';
+import Typography from '@mui/material/Typography';
 import Items from '../components/Items';
 import { useFamilyMemberParam } from '../hooks/useFamilyMemberParam';
 
@@ -11,7 +11,7 @@ export default function FamilyMember() {
     return (
       <>
         <Link to='/home'>{'< Home'}</Link>
-        <Heading>{displayName}</Heading>
+        <Typography>{displayName}</Typography>
         <Items items={items} />
       </>
     )

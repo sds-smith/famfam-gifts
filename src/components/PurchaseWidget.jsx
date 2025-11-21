@@ -1,5 +1,6 @@
 
-import { Button, Tag, useColorModeValue } from '@chakra-ui/react';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
 import { useEditList } from '../hooks/useEditList';
 
 export default function PurchaseWidget({ item }) {
@@ -10,9 +11,9 @@ export default function PurchaseWidget({ item }) {
     <>
         { purchased
             ? <Button onClick={() => undoPurchase(item)} >
-                <Tag variant='solid' colorScheme='cyan'>{`Purchased by ${purchasedBy?.displayName}`}</Tag>
+                <Chip variant='solid' colorScheme='cyan'>{`Purchased by ${purchasedBy?.displayName}`}</Chip>
               </Button>
-            : <Button colorScheme={useColorModeValue('blackAlpha', 'whiteAlpha')} onClick={() => markItemPurchased(item)}>Mark Purchased</Button>
+            : <Button onClick={() => markItemPurchased(item)}>Mark Purchased</Button>
         }
     </>
   )

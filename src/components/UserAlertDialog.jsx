@@ -1,42 +1,32 @@
-import { useRef } from 'react';
-import {
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogContent,
-    AlertDialogOverlay,
-    Button,
-  } from '@chakra-ui/react';
+
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
 
   export default function UserAlertDialog({userError, isOpen, onClose}) {
-    const cancelRef = useRef();
   
     return (
       <>
-        <AlertDialog
-          isOpen={isOpen}
-          leastDestructiveRef={cancelRef}
+        <Dialog
+          open={isOpen}
           onClose={onClose}
         >
-          <AlertDialogOverlay>
-            <AlertDialogContent>
-              <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              <DialogTitle fontSize='lg' fontWeight='bold'>
                 {userError}
-              </AlertDialogHeader>
+              </DialogTitle>
   
-              <AlertDialogBody>
+              <DialogContent>
                 If you are a user of this App, you may need to log in with a different email.
-              </AlertDialogBody>
+              </DialogContent>
   
-              <AlertDialogFooter>
-                <Button ref={cancelRef} onClick={onClose}>
+              <DialogActions>
+                <Button onClick={onClose}>
                   Close
                 </Button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialogOverlay>
-        </AlertDialog>
+              </DialogActions>
+\        </Dialog>
       </>
     )
   }

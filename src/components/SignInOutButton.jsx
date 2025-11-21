@@ -1,5 +1,5 @@
 
-import { Button } from '@chakra-ui/react';
+import Button from '@mui/material/Button';
 import { useAuthContext } from '../context/AuthContext';
 
 export default function SignInOutButton() {
