@@ -14,7 +14,7 @@ export default function FamilyMemberCard({member}) {
   return (
     <Link 
       to={`/home/${memberParam}`}
-      style={{textDecoration: 'none'}}
+      style={{textDecoration: 'none', color: 'black'}}
     >
       <Card >
         <CardHeader

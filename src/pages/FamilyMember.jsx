@@ -10,7 +10,7 @@ export default function FamilyMember() {
 
     return (
       <>
-        <Link to='/home'>{'< Home'}</Link>
+        <Link to='/home' style={{textDecoration: 'none', color: 'black'}}>{'< Home'}</Link>
         <Typography>{displayName}</Typography>
         <Items items={items} />
       </>

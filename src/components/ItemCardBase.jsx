@@ -20,21 +20,17 @@ export default function ItemCardBase({item}) {
 
   return (
     <Card >
-      <CardHeader>
-            <Box>
-              <Typography size='md' >{item?.name}</Typography>
-              { item?.priority <= 5 &&
-                <Typography size='sm' fontWeight='semibold'>{`Priority Level: ${item?.priority}`}</Typography> 
-              }
-              { Boolean(item.url) && (
-                <Typography>
-                  <Link href={item.url} target='_blank' rel='no-referrer'>{item.url.split('/')[2]}</Link>
-                </Typography>
-              )}
-            </Box>
-      </CardHeader>
+      <CardHeader
+        title={item?.name}
+        subheader={item?.priority <= 5 ? `Priority Level: ${item?.priority}` :  ''}
+      />
       <CardContent>
         <Box>
+           { Boolean(item.url) && (
+                <Typography sx={{color: 'blue', textDecoration: 'underline'}}>
+                  {item.url.split('/')[2]}
+                </Typography>
+              )}
           <Typography>{`${item?.comment || ''}`}</Typography>
           { userSelectedSelf ? <MyItemControls item={item} /> : <PurchaseWidget item={item} /> }
         </Box>

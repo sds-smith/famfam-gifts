@@ -13,14 +13,14 @@ export default function TopNav() {
     return (
       <>
         <Box px={4}>
-           <Stack spacing={8} alignItems={'center'}>
+           <Stack direction="row" spacing={8} alignItems={'center'}>
               <Box>FamFam Gift Reg</Box>
-            </Stack>
+            
               <SignInOutButton /> 
               <Avatar
                 size={'sm'}
                 src={ currentUser?.photoURL }
-              />
+              /></Stack>
        </Box>
       </>
     )

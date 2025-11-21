@@ -22,7 +22,7 @@ export default function MyItemControls({ item }) {
 
   return (
     <>
-      <ButtonGroup variant='outline' spacing='6'>
+      <ButtonGroup variant='text' spacing='6'>
         <Button onClick={onOpenEdit} id='editButton'>Edit</Button>
         <Button onClick={onOpenDelete} id='deleteButton'>Delete</Button>
         <Button onClick={receive} id='receivedButton'>Received</Button>

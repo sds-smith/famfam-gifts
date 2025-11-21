@@ -1,4 +1,5 @@
 
+import Link from '@mui/material/Link';
 import ItemCardBase from './ItemCardBase';
 
 export default function ItemCard({item}) {
@@ -7,9 +8,16 @@ export default function ItemCard({item}) {
     <>
       { item.url 
         ? (
-            <ItemCardBase
-              item={item}
-            />
+            <Link 
+              href={item.url} 
+              target='_blank' 
+              rel='no-referrer'
+              style={{textDecoration: 'none'}}
+            >
+              <ItemCardBase
+                item={item}
+              />
+            </Link>
         ) : (
           <ItemCardBase
             item={item}

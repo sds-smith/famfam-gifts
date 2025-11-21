@@ -21,7 +21,7 @@ export default function Items({ items }) {
     return (
         <>
             <Stack spacing={4} align='start'>
-                { userSelectedSelf && <Button onClick={onOpenEdit}>Add Item</Button> }
+                { userSelectedSelf && <Button variant="contained" onClick={onOpenEdit}>Add Item</Button> }
                 <Stack spacing={4}>
                     { items?.map(item => (
                         <ItemCard key={item.name} item={item} />

@@ -13,7 +13,7 @@ export default function PurchaseWidget({ item }) {
             ? <Button onClick={() => undoPurchase(item)} >
                 <Chip variant='solid'>{`Purchased by ${purchasedBy?.displayName}`}</Chip>
               </Button>
-            : <Button onClick={() => markItemPurchased(item)}>Mark Purchased</Button>
+            : <Button variant="contained" sx={{backgroundColor: 'gray'}} onClick={() => markItemPurchased(item)}>Mark Purchased</Button>
         }
     </>
   )
