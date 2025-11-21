@@ -23,9 +23,9 @@ export default function MyItemControls({ item }) {
   return (
     <>
       <ButtonGroup variant='outline' spacing='6'>
-        <Button colorScheme='blue' onClick={onOpenEdit} id='editButton'>Edit</Button>
-        <Button colorScheme='red' onClick={onOpenDelete} id='deleteButton'>Delete</Button>
-        <Button colorScheme='gray' onClick={receive} id='receivedButton'>Received</Button>
+        <Button onClick={onOpenEdit} id='editButton'>Edit</Button>
+        <Button onClick={onOpenDelete} id='deleteButton'>Delete</Button>
+        <Button onClick={receive} id='receivedButton'>Received</Button>
       </ButtonGroup>
       <EditItemModal action='Edit' item={item} isOpen={isOpenEdit} onClose={onCloseEdit}/>
       <DeleteAlertDialog item={item} isOpen={isOpenDelete} onClose={onCloseDelete} />

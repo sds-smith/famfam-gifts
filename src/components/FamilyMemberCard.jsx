@@ -4,26 +4,23 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 export default function FamilyMemberCard({member}) {
   const memberParam = member?.displayName.replace(' ', '_');
-console.log({member})
+  const [first, last] = member?.displayName.split(' ');
+  const initials = `${first.slice(0,1)}${last.slice(0,1)}`
+
   return (
-    <Link to={`/home/${memberParam}`}>
+    <Link 
+      to={`/home/${memberParam}`}
+      style={{textDecoration: 'none'}}
+    >
       <Card >
-        <CardHeader>
-          {/* <Flex spacing='4'>
-            <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'> */}
-              <Avatar name={member.displayName} src={member.photoURL}/>
-              <Box>
-                <Typography >{member?.displayName}</Typography>
-                <Typography>{`Items: ${member?.items.length}`}</Typography>
-              </Box>
-            {/* </Flex>
-          </Flex> */}
-        </CardHeader>
+        <CardHeader
+          avatar={<Avatar alt={member.displayName || 'First Last'} src={member.photoURL}>{initials}</Avatar>}
+          title={member?.displayName}
+        />
         <CardContent>
           <Typography>{`Items: ${member?.items.length}`}</Typography>
         </CardContent>

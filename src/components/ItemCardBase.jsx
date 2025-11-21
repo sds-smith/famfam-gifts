@@ -19,10 +19,7 @@ export default function ItemCardBase({item}) {
   const userSelectedSelf = currentUser?.uid === selectedFamilyMember?.uid;
 
   return (
-    <Card 
-      w='xs' 
-      borderWidth={item.priority !== 10 && '0px 1px 4px 0px'}
-    >
+    <Card >
       <CardHeader>
             <Box>
               <Typography size='md' >{item?.name}</Typography>

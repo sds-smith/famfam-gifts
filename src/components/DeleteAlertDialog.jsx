@@ -32,7 +32,7 @@ import { useEditList } from '../hooks/useEditList';
                 <Button onClick={onClose}>
                   Cancel
                 </Button>
-                <Button colorScheme='red' onClick={handleDelete} ml={3}>
+                <Button onClick={handleDelete} >
                   Delete
                 </Button>
               </DialogActions>

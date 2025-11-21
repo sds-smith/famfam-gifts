@@ -95,10 +95,10 @@ import { useEditList } from '../hooks/useEditList';
                 </Stack>
             </DialogContent>
             <DialogActions>
-              <Button colorScheme='blue' mr={3} onClick={handleSubmit}>
+              <Button onClick={handleSubmit}>
                 Submit
               </Button>
-              <Button variant='ghost' onClick={onClose}>Cancel</Button>
+              <Button onClick={onClose}>Cancel</Button>
             </DialogActions>
         </Dialog>
     )
