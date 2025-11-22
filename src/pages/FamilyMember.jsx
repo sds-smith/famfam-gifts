@@ -49,7 +49,7 @@ export default function FamilyMember() {
             onChange={handleSelect}
             input={<OutlinedInput label="Select Categories" />}
           >
-            { allCategories.map(c => (
+            { allCategories.length > 1 && allCategories.map(c => (
               <MenuItem key={c} value={c}>{c}</MenuItem>
             ))}
           </Select>
