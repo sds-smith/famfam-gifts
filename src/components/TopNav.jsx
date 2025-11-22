@@ -2,6 +2,7 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
 
 import { Link } from 'react-router-dom';
 import SignInOutButton from './SignInOutButton';
@@ -12,9 +13,9 @@ export default function TopNav() {
 
     return (
       <>
-        <Box px={4}>
-           <Stack direction="row" spacing={8} alignItems={'center'}>
-              <Box>FamFam Gift Reg</Box>
+        <Box sx={{position: 'fixed', top: '0', left: '0', right: '0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'gray', padding: '0.5rem 2rem'}}>
+              <Typography variant="h6">FamFam Gift Reg</Typography>
+           <Stack direction="row" spacing={2} alignItems={'right'}>
             
               <SignInOutButton /> 
               <Avatar

@@ -7,6 +7,6 @@ export default function SignInOutButton() {
     const btnText = currentUser ? 'Sign Out' : 'Sign In';
 
     return (
-      <Button variant='ghost' onClick={signInOut}>{btnText}</Button>
+      <Button sx={{color: 'black'}} onClick={signInOut}>{btnText}</Button>
     )
 }
