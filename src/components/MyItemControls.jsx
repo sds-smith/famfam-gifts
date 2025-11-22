@@ -6,17 +6,31 @@ import DeleteAlertDialog from './DeleteAlertDialog';
 import { useEditList } from '../hooks/useEditList';
 
 export default function MyItemControls({ item }) {
+  const { undoPurchase } = useEditList();
 
   const [ isOpenEdit, setIsOpenEdit ] = useState(false);
   const [ isOpenDelete, setIsOpenDelete ] = useState(false);
 
-  const onOpenEdit = () => setIsOpenEdit(true)
-  const onOpenDelete = () => setIsOpenDelete(true)
-  const onCloseEdit = () => setIsOpenEdit(false)
-  const onCloseDelete = () => setIsOpenDelete(false)
+  const onOpenEdit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpenEdit(true);
+  }
+  const onOpenDelete = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpenDelete(true);
+  }
+  const onCloseEdit = () => {
+    setIsOpenEdit(false);
+  }
+  const onCloseDelete = () => {
+    setIsOpenDelete(false);
+  }
 
-  const { undoPurchase } = useEditList();
-  const receive = () => {
+  const receive = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (item.purchased) undoPurchase(item)
   }
 

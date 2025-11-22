@@ -15,19 +15,23 @@ import { useEditList } from '../hooks/useEditList';
     const { submitEdit, addItem } = useEditList();
 
     const [ name, setName ] = useState(item.name || '');
+    const [ category, setCategory ] = useState(item.category || '');
     const [ url, setUrl ] = useState(item.url || '');
     const [ comment, setComment ] = useState(item.comment || '');
     const [ priority, setPriority ] = useState(item.priority || 10);
 
     const handleChangeName = (e) => setName(e.target.value);
+    const handleChangeCategory = (e) => setCategory(e.target.value);
     const handleChangeUrl = (e) => setUrl(e.target.value);
     const handleChangeComment = (e) => setComment(e.target.value);
     const handleChangePriority = (e) => setPriority(e.target.value);
 
     const resetModalState = () => {
         setName("");
+        setCategory("");
         setUrl("");
         setComment("");
+        setPriority(10);
     }
 
     const submit = {
@@ -40,6 +44,7 @@ import { useEditList } from '../hooks/useEditList';
         submit[action]({
             id: item.id,
             name,
+            category,
             url,
             comment,
             priority
@@ -59,6 +64,14 @@ import { useEditList } from '../hooks/useEditList';
                             size='md'
                             value={name}
                             onChange={handleChangeName}
+                        />
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel>Item Category</FormLabel>
+                        <TextField 
+                            size='md'
+                            value={category}
+                            onChange={handleChangeCategory}
                         />
                     </FormControl>
                     <FormControl>

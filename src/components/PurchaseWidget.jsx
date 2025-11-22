@@ -7,13 +7,25 @@ export default function PurchaseWidget({ item }) {
     const { purchased, purchasedBy } = item;
     const { markItemPurchased, undoPurchase } = useEditList();
 
+    const markPurchased = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      markItemPurchased(item)
+    }
+
+    const unMarkPurchased = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      undoPurchase(item)
+    }
+
   return (
     <>
         { purchased
-            ? <Button onClick={() => undoPurchase(item)} >
+            ? <Button onClick={unMarkPurchased} >
                 <Chip variant='solid'>{`Purchased by ${purchasedBy?.displayName}`}</Chip>
               </Button>
-            : <Button variant="contained" sx={{backgroundColor: 'gray'}} onClick={() => markItemPurchased(item)}>Mark Purchased</Button>
+            : <Button variant="contained" sx={{backgroundColor: 'gray'}} onClick={markPurchased}>Mark Purchased</Button>
         }
     </>
   )

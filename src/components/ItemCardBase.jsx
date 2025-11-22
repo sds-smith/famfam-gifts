@@ -38,8 +38,9 @@ export default function ItemCardBase({item}) {
       />
       <CardContent>
         <Box>
+          { !!item.category && <Typography>{`Category: ${item.category}`}</Typography>}
            { Boolean(item.url) && (
-                <Typography sx={{color: 'blue', textDecoration: 'underline'}}>
+                <Typography sx={{color: 'blue', textDecoration: 'underline', zIndex: '100'}}>
                   {item.url.split('/')[2]}
                 </Typography>
               )}

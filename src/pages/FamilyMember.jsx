@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
@@ -33,6 +33,8 @@ export default function FamilyMember() {
     const userSelectedSelf = currentUser?.uid === selectedFamilyMember?.uid;
 
     const handleSelect = (e) => setSelectedCategories(e.target.value);
+
+    useEffect(() => setSelectedCategories([]), [allCategories]);
 
     return (
       <>
