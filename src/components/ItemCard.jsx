@@ -1,9 +1,9 @@
 
 import Link from '@mui/material/Link';
 import ItemCardBase from './ItemCardBase';
-import { Item } from './Item';
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
+import { Item } from './Item';
 
 export default function ItemCard({item}) {
   const {
@@ -20,7 +20,7 @@ export default function ItemCard({item}) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div  ref={setNodeRef} > 
       { item.url 
         ? (
             <Link 

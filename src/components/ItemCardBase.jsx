@@ -4,12 +4,16 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Link from '@mui/material/Link';
+import {useSortable} from '@dnd-kit/sortable';
+import {CSS} from '@dnd-kit/utilities';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PurchaseWidget from './PurchaseWidget';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import { useAuthContext } from '../context/AuthContext';
 import { useFamilyMemberParam } from '../hooks/useFamilyMemberParam';
 import MyItemControls from './MyItemControls';
+import { Item } from './Item';
 
 const priorityColors = {
   1: 'rgba(66, 245, 245, 0.1)',
@@ -20,6 +24,14 @@ const priorityColors = {
 }
 
 export default function ItemCardBase({item}) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({id: item.id});
+
   const { currentUser } = useAuthContext();
   const selectedFamilyMember = useFamilyMemberParam();
 
@@ -28,10 +40,17 @@ export default function ItemCardBase({item}) {
 
   const borderColor = priorityColors[item?.priority] || 'purple';
 
+    
+    const style = {
+      transform: CSS.Transform.toString(transform),
+      transition,
+    };
+
   return (
     <Card 
       sx={{backgroundColor: borderColor}}
     >
+      <Item item={item} id={item.id} style={style} {...attributes} {...listeners}><DragIndicatorIcon/></Item>
       <CardHeader
         title={item?.name}
         subheader={item?.priority <= 5 ? `Priority Level: ${item?.priority}` :  ''}

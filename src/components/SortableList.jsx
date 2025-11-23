@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ItemCard from './ItemCard';
-import { Item } from "./Item";
 
 import {
   DndContext, 
@@ -24,6 +23,7 @@ export default function SortableList({ category, items }) {
     // const prioritized = items?.sort((a, b) => (a.priority || 10) - (b.priority || 10))
     const [activeId, setActiveId] = useState(null);
     const [prioritized, setPrioritized] = useState([]);
+    const [visible, setVisible] = useState([]);
 
     const sensors = useSensors(
       useSensor(PointerSensor),
@@ -32,11 +32,12 @@ export default function SortableList({ category, items }) {
       })
     );
 
-    // function handleDragStart(event) {
-    //   const {active} = event;
-
-    //   setActiveId(active.id);
-    // }
+    function handleDragStart(event) {
+      const {active} = event;
+console.log({active})
+      setActiveId(active.id);
+      setVisible(prioritized.filter(i => `${i}` !== `${active.id}`))
+    }
 
     function handleDragEnd(event) {
       const {active, over} = event;
@@ -50,14 +51,24 @@ export default function SortableList({ category, items }) {
         });
       }
 
-    //   setActiveId(null);
+      setActiveId(null);
     }
 
     useEffect(() => console.log('[SortableList]',{prioritized}),[prioritized])
+    useEffect(() => console.log('[SortableList]',{visible}),[visible])
 
     useEffect(() => {
-        if (!!items) setPrioritized(items.slice(0,3).map(({id})=>id))
+        if (!!items) {
+            const ids = items.map(({id})=>id)
+            setPrioritized(ids);
+        }
     }, [items])
+
+    useEffect(() => {
+        if (!activeId && !!prioritized) {
+            setVisible(prioritized)
+        }
+    }, [activeId, prioritized])
 
     return (
         <div style={{marginTop: '2rem'}}>
@@ -66,7 +77,7 @@ export default function SortableList({ category, items }) {
                     <DndContext 
                         sensors={sensors}
                         collisionDetection={closestCenter}
-                        // onDragStart={handleDragStart}
+                        onDragStart={handleDragStart}
                         onDragEnd={handleDragEnd}
                     >
                         <SortableContext 
@@ -74,14 +85,14 @@ export default function SortableList({ category, items }) {
                           strategy={verticalListSortingStrategy}
                         >
                             <Stack spacing={4}>
-                                { prioritized?.map(id => (
+                                { visible?.map(id => (
                                     <ItemCard key={id} item={items.find(item => item.id === id)} />
                                 ))}
                             </Stack>
                         </SortableContext>
-                        {/* <DragOverlay>
-                          {activeId ? <Item id={activeId} /> : null}
-                        </DragOverlay> */}
+                        <DragOverlay>
+                          {activeId ? <ItemCard id={activeId} item={items.find(item => item.id === activeId)} /> : null}
+                        </DragOverlay>
                     </DndContext>
             </Stack>
         </div>
