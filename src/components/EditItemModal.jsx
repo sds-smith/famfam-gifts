@@ -53,7 +53,7 @@ import { useEditList } from '../hooks/useEditList';
     }
 
     return (
-        <Dialog open={isOpen} onClose={onClose}>
+        <Dialog fullScreen open={isOpen} onClose={onClose}>
             <DialogTitle>{`${action} ${item.name || 'Item'}`}</DialogTitle>
             <DialogContent>
                 <Stack spacing={3}>
