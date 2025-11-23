@@ -23,7 +23,7 @@ export default function PurchaseWidget({ item }) {
     <>
         { purchased
             ? <Button onClick={unMarkPurchased} >
-                <Chip variant='solid'>{`Purchased by ${purchasedBy?.displayName}`}</Chip>
+                <Chip variant='filled' label={`Purchased by ${purchasedBy?.displayName}`} color="success"/>
               </Button>
             : <Button variant="contained" sx={{backgroundColor: 'gray'}} onClick={markPurchased}>Mark Purchased</Button>
         }
