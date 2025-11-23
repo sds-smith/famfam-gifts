@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ItemCard from './ItemCard';
 
-export default function Items({ category, items }) {
+export default function List({ category, items }) {
     const prioritized = items?.sort((a, b) => (a.priority || 10) - (b.priority || 10))
     return (
         <div style={{marginTop: '2rem'}}>
