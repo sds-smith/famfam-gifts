@@ -6,8 +6,9 @@ import {useSortable} from '@dnd-kit/sortable';
 export default function ItemCard({item}) {
   const {
     setNodeRef,
-  } = useSortable({id: item.id});
+  } = useSortable({id: item?.id});
 
+  if (!item) return null;
   return (
     <div  ref={setNodeRef} > 
       { item.url 

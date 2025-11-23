@@ -19,9 +19,10 @@ export function useEditList() {
                 uid
             }
         })
-        const updatedItems = items.filter(itemToKeep => itemToKeep.id !== item.id)
-        updatedItems.push(updatedItem)
-        updatedItems.sort((a,b) => a.id - b.id)
+
+        const itemToReplace = items.find(i => i.id === updatedItem.id);
+        const idx = items.indexOf(itemToReplace);
+        const updatedItems = items.toSpliced(idx, 1, updatedItem);
 
         const updatedUsersArray = await updateUser(memberId, updatedItems)
         updateFamilyMembers(updatedUsersArray);
@@ -33,9 +34,10 @@ export function useEditList() {
                 purchased: false,
                 purchasedBy: null
             })
-            const updatedItems = items.filter(itemToKeep => itemToKeep.id !== item.id)
-            updatedItems.push(updatedItem)
-            updatedItems.sort((a,b) => a.id - b.id)
+
+            const itemToReplace = items.find(i => i.id === updatedItem.id);
+            const idx = items.indexOf(itemToReplace);
+            const updatedItems = items.toSpliced(idx, 1, updatedItem);
     
             const updatedUsersArray = await updateUser(memberId, updatedItems)
             updateFamilyMembers(updatedUsersArray);
@@ -43,9 +45,9 @@ export function useEditList() {
     }
 
     const submitEdit = async (newItem) => {
-        const updatedItems = items.filter(itemToKeep => itemToKeep.id !== newItem.id)
-        updatedItems.push(newItem)
-        updatedItems.sort((a,b) => a.id - b.id)
+        const itemToReplace = items.find(item => item.id === newItem.id);
+        const idx = items.indexOf(itemToReplace);
+        const updatedItems = items.toSpliced(idx, 1, newItem);
         const updatedUsersArray = await updateUser(uid, updatedItems)
         updateFamilyMembers(updatedUsersArray);
     }
@@ -53,7 +55,6 @@ export function useEditList() {
     const addItem = async (newItem) => {
         const id = items.reduce((acc, curr) => Math.max(acc, curr.id), 0) + 1;
         const updatedItems = [...items, {...newItem, id}]
-        updatedItems.sort((a,b) => a.id - b.id)
         const updatedUsersArray = await updateUser(uid, updatedItems)
         updateFamilyMembers(updatedUsersArray);
     }
@@ -61,6 +62,12 @@ export function useEditList() {
     const deleteItem = async (item) => {
         const updatedItems = items.filter(itemToMatch => itemToMatch.id !== item.id)
         const updatedUsersArray = await updateUser(uid, updatedItems)
+        updateFamilyMembers(updatedUsersArray);
+    }
+
+    const saveSortedList = async (newList) => {
+        const updatedUsersArray = await updateUser(uid, newList);
+        console.log({updatedUsersArray})
         updateFamilyMembers(updatedUsersArray);
     }
 
@@ -81,6 +88,7 @@ export function useEditList() {
         submitEdit,
         addItem,
         deleteItem,
+        saveSortedList,
         combineUsers
     }
 }

@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ItemCard from './ItemCard';
-import { useAuthContext } from "../context/AuthContext";
-import { updateUser } from "../utils/firebase.utils";
+import { useEditList } from "../hooks/useEditList";
 
 import {
   DndContext, 
@@ -22,7 +21,7 @@ import {
 } from '@dnd-kit/sortable';
 
 export default function SortableList({ category, items, itemsByCategory }) {
-    const { currentUser } = useAuthContext();
+    const { saveSortedList } = useEditList();
 
     const [activeId, setActiveId] = useState(null);
     const [prioritized, setPrioritized] = useState([]);
@@ -56,7 +55,7 @@ export default function SortableList({ category, items, itemsByCategory }) {
         });
         const sortedItems = sortedIds.map(id => items.find(item => `${item.id}` === `${id}`));
         console.log({sortedItems})
-        updateUser(currentUser.uid, sortedItems);
+        saveSortedList(sortedItems);
       }
 
       setActiveId(null);
