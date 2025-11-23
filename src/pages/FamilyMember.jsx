@@ -8,6 +8,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import SortableList from '../components/SortableList';
+import List from '../components/List';
 import EditItemModal from '../components/EditItemModal';
 import { useAuthContext } from '../context/AuthContext';
 import { useFamilyMemberParam } from '../hooks/useFamilyMemberParam';
@@ -57,9 +58,15 @@ export default function FamilyMember() {
           </Select>
         </FormControl>
         { !selectedCategories.length 
-          ? <SortableList key={'all'} category={"All Items"} items={items} itemsByCategory={itemsByCategory} />
+          ? <>{ userSelectedSelf 
+              ? <SortableList key={'all'} category={"All Items"} items={items} itemsByCategory={itemsByCategory} />
+              : <List key="all" category={"All Items"} items={items} />
+            }</>
           : selectedCategories.map(cat => (
-              <SortableList key={cat} category={cat} items={items} itemsByCategory={itemsByCategory} />
+            <>{ userSelectedSelf
+                ? <SortableList key={cat} category={cat} items={items} itemsByCategory={itemsByCategory} />
+                : <List key={cat} category={cat} items={itemsByCategory[cat]}/>
+            }</>
           ))
         }
         <EditItemModal action='Add' item={{}} isOpen={isOpenEdit} onClose={onCloseEdit} />
