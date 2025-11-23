@@ -21,7 +21,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
-export default function SortableList({ category, items }) {
+export default function SortableList({ category, items, itemsByCategory }) {
     const { currentUser } = useAuthContext();
 
     const [activeId, setActiveId] = useState(null);
@@ -39,7 +39,8 @@ export default function SortableList({ category, items }) {
       const {active} = event;
 
       setActiveId(active.id);
-      setVisible(prioritized.filter(i => `${i}` !== `${active.id}`))
+      const ids = category !== 'All Items' ? prioritized.filter(id => itemsByCategory[category].some((item) => `${item.id}` === `${id}`)) : prioritized;
+      setVisible(ids.filter(i => `${i}` !== `${active.id}`))
     }
 
     function handleDragEnd(event) {
@@ -50,7 +51,6 @@ export default function SortableList({ category, items }) {
         setPrioritized((items) => {
           const oldIndex = items.indexOf(active.id);
           const newIndex = items.indexOf(over.id);
-
           sortedIds = arrayMove(items, oldIndex, newIndex);
           return sortedIds;
         });
@@ -71,7 +71,8 @@ export default function SortableList({ category, items }) {
 
     useEffect(() => {
         if (!activeId && !!prioritized) {
-            setVisible(prioritized)
+            const ids = category !== 'All Items' ? prioritized.filter(id => itemsByCategory[category].some((item) => `${item.id}` === `${id}`)) : prioritized;
+            setVisible(ids)
         }
     }, [activeId, prioritized])
 
