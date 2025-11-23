@@ -99,10 +99,6 @@ export const getUsers = async () => {
   const querySnapshot = await getDocs(q)
   return querySnapshot.docs.map((docSnapshot) => {
     const user = docSnapshot.data();
-    user.items = user.items.map(item => ({
-      ...item,
-      priority: item.priority || 10
-    }))
     return user;
   })
 }

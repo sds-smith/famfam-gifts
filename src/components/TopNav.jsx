@@ -13,7 +13,7 @@ export default function TopNav() {
 
     return (
       <>
-        <Box sx={{position: 'fixed', top: '0', left: '0', right: '0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'gray', padding: '0.5rem 2rem'}}>
+        <Box sx={{position: 'fixed', top: '0', left: '0', right: '0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'gray', padding: '0.5rem 2rem', zIndex: '10'}}>
               <Typography variant="h6">FamFam Gift Reg</Typography>
            <Stack direction="row" spacing={2} alignItems={'right'}>
             

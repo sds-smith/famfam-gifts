@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ItemCard from './ItemCard';
+import { useAuthContext } from "../context/AuthContext";
+import { updateUser } from "../utils/firebase.utils";
 
 import {
   DndContext, 
@@ -20,7 +22,8 @@ import {
 } from '@dnd-kit/sortable';
 
 export default function SortableList({ category, items }) {
-    // const prioritized = items?.sort((a, b) => (a.priority || 10) - (b.priority || 10))
+    const { currentUser } = useAuthContext();
+
     const [activeId, setActiveId] = useState(null);
     const [prioritized, setPrioritized] = useState([]);
     const [visible, setVisible] = useState([]);
@@ -34,7 +37,7 @@ export default function SortableList({ category, items }) {
 
     function handleDragStart(event) {
       const {active} = event;
-console.log({active})
+
       setActiveId(active.id);
       setVisible(prioritized.filter(i => `${i}` !== `${active.id}`))
     }
@@ -43,19 +46,21 @@ console.log({active})
       const {active, over} = event;
 
       if (active.id !== over.id) {
+        let sortedIds;
         setPrioritized((items) => {
           const oldIndex = items.indexOf(active.id);
           const newIndex = items.indexOf(over.id);
 
-          return arrayMove(items, oldIndex, newIndex);
+          sortedIds = arrayMove(items, oldIndex, newIndex);
+          return sortedIds;
         });
+        const sortedItems = sortedIds.map(id => items.find(item => `${item.id}` === `${id}`));
+        console.log({sortedItems})
+        updateUser(currentUser.uid, sortedItems);
       }
 
       setActiveId(null);
     }
-
-    useEffect(() => console.log('[SortableList]',{prioritized}),[prioritized])
-    useEffect(() => console.log('[SortableList]',{visible}),[visible])
 
     useEffect(() => {
         if (!!items) {
@@ -96,5 +101,5 @@ console.log({active})
                     </DndContext>
             </Stack>
         </div>
-      )
+    )
 }

@@ -6,7 +6,6 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import { useEditList } from '../hooks/useEditList';
@@ -18,20 +17,20 @@ import { useEditList } from '../hooks/useEditList';
     const [ category, setCategory ] = useState(item.category || '');
     const [ url, setUrl ] = useState(item.url || '');
     const [ comment, setComment ] = useState(item.comment || '');
-    const [ priority, setPriority ] = useState(item.priority || 10);
+    const [ price, setPrice ] = useState(item.price || '');
 
     const handleChangeName = (e) => setName(e.target.value);
     const handleChangeCategory = (e) => setCategory(e.target.value);
     const handleChangeUrl = (e) => setUrl(e.target.value);
     const handleChangeComment = (e) => setComment(e.target.value);
-    const handleChangePriority = (e) => setPriority(e.target.value);
+    const handleChangePrice = (e) => setPrice(e.target.value);
 
     const resetModalState = () => {
         setName("");
         setCategory("");
         setUrl("");
         setComment("");
-        setPriority(10);
+        setPrice("");
     }
 
     const submit = {
@@ -47,7 +46,7 @@ import { useEditList } from '../hooks/useEditList';
             category,
             url,
             comment,
-            priority
+            price
         });
         resetModalState();
         onClose();
@@ -83,6 +82,14 @@ import { useEditList } from '../hooks/useEditList';
                         />
                     </FormControl>
                     <FormControl>
+                        <FormLabel>Item Price</FormLabel>
+                        <TextField 
+                            size='md'
+                            value={price}
+                            onChange={handleChangePrice}
+                        />
+                    </FormControl>
+                    <FormControl>
                         <FormLabel>Comments</FormLabel>
                         <TextField
                             lines="4" 
@@ -90,20 +97,6 @@ import { useEditList } from '../hooks/useEditList';
                             value={comment}
                             onChange={handleChangeComment}
                         />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Set Priority</FormLabel>
-                        <TextField
-                            select 
-                            style={{width: '100%'}}
-                            name="priority" 
-                            id="priority-select"
-                            value={priority}
-                            onChange={handleChangePriority}
-                        >
-                          <MenuItem ></MenuItem>
-                          {[1,2,3,4,5,].map(option => <MenuItem key={option} value={option}>{option}</MenuItem>)}
-                        </TextField>
                     </FormControl>
                 </Stack>
             </DialogContent>
